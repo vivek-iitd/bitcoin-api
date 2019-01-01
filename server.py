@@ -22,31 +22,31 @@ def before_request():
 
 
 def get_db():
-    if 'db' not in g:
-        g.db = sqlite3.connect(
-            app.config['DATABASE_NAME'],
-            detect_types=sqlite3.PARSE_DECLTYPES
-        )
-        g.db.row_factory = sqlite3.Row
-    return g.db
+	if 'db' not in g:
+		g.db = sqlite3.connect(
+			app.config['DATABASE_NAME'],
+			detect_types=sqlite3.PARSE_DECLTYPES
+	    )
+	g.db.row_factory = sqlite3.Row
+	return g.db
 
 
 def close_db(e=None):
-    db = g.pop('db', None)
-    if db is not None:
-        db.close()
+	db = g.pop('db', None)
+	if db is not None:
+		db.close()
 
 
 def init_db():
-    db = get_db()
-    with app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
-    return db
+	db = get_db()
+	with app.open_resource('schema.sql') as f:
+		db.executescript(f.read().decode('utf8'))
+	return db
 
 #homepage
 @app.route("/")
 def hello():
-    return "Happy new year from Vivek, this project provides apis related to bitoin price movement and forecasting."
+	return "Happy new year from Vivek, this project provides apis related to bitoin price movement and forecasting."
 
 
 #returns simple moving average price
@@ -91,4 +91,4 @@ def forecast():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+	app.run(debug=True)

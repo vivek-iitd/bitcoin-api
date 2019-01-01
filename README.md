@@ -6,7 +6,6 @@ This project is all about building REST api's related to bitcoin using Flask App
 
 venv has all packages needed to run the project succesfully, go to the project folder and run following bash commands.
 ```bash
-virtualenv venv
 source venv/bin/activate
 python server.py
 ```
